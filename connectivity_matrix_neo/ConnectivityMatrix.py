@@ -33,9 +33,9 @@ class ConnectivityMatrix:
     def _get_path_as_id_list(path):
         id_list = []
         for i in range(0, len(path.relationships)):
+            id_list.append(path.nodes[i].properties['id'])
             id_list.append(path.relationships[i].properties['id'])
-            if i != len(path.relationships) - 1:
-                id_list.append(path.nodes[i + 1].properties['id'])
+            id_list.append(path.nodes[i + 1].properties['id'])
         return id_list
 
     def _get_source_index(self, node):

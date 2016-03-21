@@ -1,0 +1,3 @@
+{
+  "query": "MATCH p=n-[:SYNAPSE*1..2]->m WHERE n.label='CBb3m'and m.label='GC' RETURN p"
+}

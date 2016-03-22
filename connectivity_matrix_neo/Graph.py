@@ -17,6 +17,7 @@ class Graph:
         self._init_edge_attributes()
         self._init_node_attributes()
         self._init_nodes(graph.nodes)
+        self._init_edges(graph.relationships)
 
     @staticmethod
     def _get_node_as_dictionary(node, attributes):
@@ -40,6 +41,7 @@ class Graph:
 
     def _init_edges(self, edges):
         for edge in edges:
+            print edge
             if not self._is_edge_added(edge):
                 source = edge.start_node
                 target = edge.end_node

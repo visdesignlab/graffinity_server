@@ -4,8 +4,11 @@ import py2neo as neo
 from py2neo import cypher
 import connectivity_matrix_neo as cm_neo
 import json
+from flask.ext.cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 neo.authenticate('localhost:7474', 'neo4j', 'neo4j')
 neo_graph = neo.Graph('http://localhost:7474/db/data')

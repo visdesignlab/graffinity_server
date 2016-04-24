@@ -32,8 +32,8 @@ class ConnectivityMatrix:
     @staticmethod
     def _get_path_as_id_list(path):
         id_list = []
+        id_list.append(path.nodes[0].properties['id'])
         for i in range(0, len(path.relationships)):
-            id_list.append(path.nodes[i].properties['id'])
             id_list.append(path.relationships[i].properties['id'])
             id_list.append(path.nodes[i + 1].properties['id'])
         return id_list

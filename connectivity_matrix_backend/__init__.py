@@ -35,9 +35,8 @@ def run_query(graph, query):
 
     except cypher.CypherError as error:
         return json.dumps({
-            "status_code": 400,
             "message": error.message
-        })
+        }), 400
 
 
 @app.route("/", methods=["GET", "POST"])

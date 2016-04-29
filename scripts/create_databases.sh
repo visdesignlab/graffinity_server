@@ -47,8 +47,6 @@ function createdb {
 
   #fix permissions
   chown -R `whoami` ${db}d/data/graph.db
-
-  managedb ${name} start
 }
 
 function managedb {

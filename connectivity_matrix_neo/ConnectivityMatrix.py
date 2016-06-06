@@ -2,7 +2,9 @@ class ConnectivityMatrix:
     """ Class for creating a matrix representation of multi-hop relationships in neo4j databases.
     """
 
-    def __init__(self, path_list):
+    def __init__(self, path_list, node_id_key, edge_id_key):
+        self.node_id_key = node_id_key
+        self.edge_id_key = edge_id_key
         self._paths = []
         self._source_ids = []
         self._target_ids = []
@@ -10,9 +12,8 @@ class ConnectivityMatrix:
         self._init_source_and_targets(path_list)
         self._init_matrix(path_list)
 
-    @staticmethod
-    def _get_or_create_index(ids, node, allow_create=True):
-        node_id = node.properties['id']
+    def _get_or_create_index(self, ids, node, allow_create=True):
+        node_id = node.properties[self.node_id_key]
         for i in range(0, len(ids)):
             if ids[i] == node_id:
                 return i
@@ -29,13 +30,12 @@ class ConnectivityMatrix:
     def _get_or_create_target_index(self, node):
         return self._get_or_create_index(self._target_ids, node)
 
-    @staticmethod
-    def _get_path_as_id_list(path):
+    def _get_path_as_id_list(self, path):
         id_list = []
-        id_list.append(path.nodes[0].properties['id'])
+        id_list.append(path.nodes[0].properties[self.node_id_key])
         for i in range(0, len(path.relationships)):
-            id_list.append(path.relationships[i].properties['id'])
-            id_list.append(path.nodes[i + 1].properties['id'])
+            id_list.append(path.relationships[i].properties[self.edge_id_key])
+            id_list.append(path.nodes[i + 1].properties[self.node_id_key])
         return id_list
 
     def _get_source_index(self, node):

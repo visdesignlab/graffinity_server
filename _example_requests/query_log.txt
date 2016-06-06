@@ -1,0 +1,22 @@
+queries that i tried:
+
+top 10 actors related to themselves.
+{
+  "query": "MATCH p = (a:Actor)-[*1..2]-(d:Actor) WHERE a.name in ['Claude Jade', 'Woody Allen', 'Samuel L. Jackson', 'Clint Eastwood', 'Armin Mueller-Stahl', 'Robert De Niro', 'Marisa Mell', 'Gérard Depardieu', 'Russ Meyer'] AND d.name in ['Claude Jade', 'Woody Allen', 'Samuel L. Jackson', 'Clint Eastwood', 'Armin Mueller-Stahl', 'Robert De Niro', 'Marisa Mell', 'Gérard Depardieu', 'Russ Meyer'] AND not a.name = d.name return p;",
+  "graph_name": "movies"
+}
+
+top 30 actors related to themsleves
+{
+  "query": "MATCH p = (a:Actor)-[*1..2]-(d:Actor) WHERE a.name in 
+['Claude Jade', 'Woody Allen', 'Samuel L. Jackson', 'Clint Eastwood', 'Armin Mueller-Stahl', 'Jackie Chan', 'Robert De Niro', 'Gérard Depardieu', 'Marisa Mell', 'Russ Meyer', 'Bruce Willis', 'Dennis Hopper', 'Morgan Freeman', 'Christopher Walken', 'Michael Caine', 'Christopher Lee', 'Danny DeVito', 'Johnny Depp', 'Sylvester Stallone', 'Romy Schneider', 'Steve Buscemi', 'Nicolas Cage', 'Robin Williams', 'Willem Dafoe', 'Donald Sutherland', 'Alec Baldwin', 'Dan Aykroyd', 'Eddie Murphy', 'Sean Connery', 'John Hurt'] AND d.name in 
+['Claude Jade', 'Woody Allen', 'Samuel L. Jackson', 'Clint Eastwood', 'Armin Mueller-Stahl', 'Jackie Chan', 'Robert De Niro', 'Gérard Depardieu', 'Marisa Mell', 'Russ Meyer', 'Bruce Willis', 'Dennis Hopper', 'Morgan Freeman', 'Christopher Walken', 'Michael Caine', 'Christopher Lee', 'Danny DeVito', 'Johnny Depp', 'Sylvester Stallone', 'Romy Schneider', 'Steve Buscemi', 'Nicolas Cage', 'Robin Williams', 'Willem Dafoe', 'Donald Sutherland', 'Alec Baldwin', 'Dan Aykroyd', 'Eddie Murphy', 'Sean Connery', 'John Hurt'] AND not a.name = d.name return p;",
+  "graph_name": "movies"
+}
+
+{
+  "query": "MATCH p = (a:Actor)-[*1..4]-(d:Actor) WHERE a.name in 
+['Claude Jade', 'Woody Allen', 'Samuel L. Jackson', 'Clint Eastwood', 'Armin Mueller-Stahl', 'Jackie Chan', 'Robert De Niro', 'Gérard Depardieu', 'Marisa Mell', 'Russ Meyer', 'Bruce Willis', 'Dennis Hopper', 'Morgan Freeman', 'Christopher Walken', 'Michael Caine', 'Christopher Lee', 'Danny DeVito', 'Johnny Depp', 'Sylvester Stallone', 'Romy Schneider', 'Steve Buscemi', 'Nicolas Cage', 'Robin Williams', 'Willem Dafoe', 'Donald Sutherland', 'Alec Baldwin', 'Dan Aykroyd', 'Eddie Murphy', 'Sean Connery', 'John Hurt'] AND d.name in 
+['Claude Jade', 'Woody Allen', 'Samuel L. Jackson', 'Clint Eastwood', 'Armin Mueller-Stahl', 'Jackie Chan', 'Robert De Niro', 'Gérard Depardieu', 'Marisa Mell', 'Russ Meyer', 'Bruce Willis', 'Dennis Hopper', 'Morgan Freeman', 'Christopher Walken', 'Michael Caine', 'Christopher Lee', 'Danny DeVito', 'Johnny Depp', 'Sylvester Stallone', 'Romy Schneider', 'Steve Buscemi', 'Nicolas Cage', 'Robin Williams', 'Willem Dafoe', 'Donald Sutherland', 'Alec Baldwin', 'Dan Aykroyd', 'Eddie Murphy', 'Sean Connery', 'John Hurt'] AND not a.name = d.name return p;",
+  "graph_name": "movies"
+}

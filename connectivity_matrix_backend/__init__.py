@@ -7,27 +7,43 @@ import json
 from flask.ext.cors import CORS
 
 app = Flask(__name__)
-
 CORS(app)
 
-neo.authenticate('localhost:7474', 'neo4j', 'neo4j')
-neo_graph = neo.Graph('http://localhost:7474/db/data')
+
+def get_graph(graph_name):
+    if graph_name == "marclab":
+        neo.authenticate('localhost:7474', 'neo4j', 'neo4j')
+        neo_graph = neo.Graph('http://localhost:7474/db/data')
+    elif graph_name == "movies":
+        neo.authenticate('localhost:7475', 'neo4j', 'neo4j')
+        neo_graph = neo.Graph('http://localhost:7475/db/data')
+    return neo_graph
 
 
-def run_query(graph, query):
+def run_query(graph_name, query):
     """
     :param graph: py2neo graph object
     :param query: cypher query string that must return paths
     :return:
     """
+    neo_graph = get_graph(graph_name)
     try:
         results = neo_graph.cypher.execute(query)
         path_list = []
         for result in results:
             path_list.append(neo.Path(result.p))
 
-        matrix = cm_neo.ConnectivityMatrix(path_list)
-        graph = cm_neo.MarcLabGraph(results.to_subgraph())
+        if graph_name == "marclab":
+            matrix = cm_neo.ConnectivityMatrix(path_list, 'id', 'id')
+            graph = cm_neo.MarcLabGraph(results.to_subgraph())
+        elif graph_name == "movies":
+            matrix = cm_neo.ConnectivityMatrix(path_list, 'node_id', 'edge_id')
+            graph = cm_neo.MoviesGraph(results.to_subgraph())
+        else:
+            return json.dumps({
+                "message": "Need to specify which graph -- either marclab or movies"
+            }), 400
+
         return json.dumps({
             "graph": graph.get_as_json_object(),
             "matrix": matrix.get_as_dictionary()
@@ -43,7 +59,9 @@ def run_query(graph, query):
 def default_resource():
     if request.method == "POST":
         query = request.get_json()[u'query']
-        return run_query(neo_graph, query)
+        graph_name = request.get_json()[u'graph_name']
+        print graph_name
+        return run_query(graph_name, query)
     elif request.method == "GET":
         return "Please send a POST request here! See _example_requests folder for details."
 

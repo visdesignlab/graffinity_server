@@ -34,26 +34,21 @@ class Graph:
                 dictionary[export_key] = Utils.get_property_as_float(node, key)
             else:
                 assert False
+        print dictionary
         return dictionary
+
+    def _get_edge_as_dictionary(self, source, target, edge):
+        assert False
 
     def _init_edge_attributes(self):
         assert False
 
     def _init_edges(self, edges):
         for edge in edges:
-            print edge
             if not self._is_edge_added(edge):
                 source = edge.start_node
                 target = edge.end_node
-                edge_dictionary = {
-                    "ID": Utils.get_property_as_int(edge, "id"),
-                    "SourceStructureID": Utils.get_property_as_int(source, "id"),
-                    "TargetStructureID": Utils.get_property_as_int(target, "id"),
-                    "SourceID": Utils.get_property_as_int(source, "id"),
-                    "TargetID": Utils.get_property_as_int(target, "id"),
-                    "Type": Utils.get_property_as_string(edge, "type"),
-                    "LinkedStructures": Utils.get_property_as_string(edge, "structures")
-                }
+                edge_dictionary = self._get_edge_as_dict(source, target, edge)
                 self._edges.append(edge_dictionary)
 
     def _init_node_attributes(self):
@@ -70,18 +65,17 @@ class Graph:
                 self._nodes.append(self._get_node_as_dictionary(node, attributes))
 
     def _is_edge_added(self, edge):
-        return self._is_entity_added(self._edges, edge)
+        return self._is_entity_added(self._edges, self._get_edge_id(edge))
 
     @staticmethod
-    def _is_entity_added(entity_list, entity):
-        entity_id = Utils.get_property_as_int(entity, "id")
+    def _is_entity_added(entity_list, entity_id):
         for e in entity_list:
             if e["ID"] == entity_id:
                 return True
         return False
 
     def _is_node_added(self, node):
-        return self._is_entity_added(self._nodes, node)
+        return self._is_entity_added(self._nodes, self._get_node_id(node))
 
     def get_as_json_object(self):
         return {
@@ -96,3 +90,9 @@ class Graph:
 
     def get_node_attributes(self):
         return self._node_attributes
+
+    def _get_node_id(self, node):
+        assert False
+
+    def _get_edge_id(self, edge):
+        assert False

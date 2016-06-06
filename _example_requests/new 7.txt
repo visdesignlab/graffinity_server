@@ -1,0 +1,24 @@
+/**
+ * Manages the matrix svg.
+ *
+ * Call stack for hiding major data cols:
+ * - updateDataCols - identifies which columns need to be hidden
+ * -- updateCol - toggles visibility of major cols
+ * -- updatePositions
+ *
+ * Stack for hiding minor data cols:
+ * - updateDataCols
+ * -- set state of isMinorColVisible
+ * -- updateMinorCols(colIndex, colWidth, isColIndexUnrolled, isMinorColVisible)
+ * -- updatePositions
+ *
+ * Stack for hiding major rows:
+ * - updateDataRows
+ * -- updateRow - toggles visibilty of major rows
+ * -- updatePositions
+ * 
+ * Stack for hiding minor cols:
+ * - updateDataRows
+ * -- this.allRows[rowIndex].hide/showMinorRow(minorRowIndex)
+ *
+ */

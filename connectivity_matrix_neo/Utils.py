@@ -1,5 +1,8 @@
 def get_property_as_string(entity, name):
-    return str(entity.properties[name])
+    if not entity.properties[name]:
+        return "Null"
+    else:
+        return str(entity.properties[name].encode('ascii', 'ignore').decode('ascii'))
 
 
 def get_property_as_float(entity, name):

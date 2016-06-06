@@ -1,3 +1,4 @@
 {
-  "query": "MATCH p=n-[:SYNAPSE*1..2]->m WHERE n.label in ['CBb4w', 'CBb3n'] and m.label in ['GC', 'GC ON'] RETURN p limit 1"
+  "query": "MATCH p=n-[:SYNAPSE*1..2]->m WHERE n.label in ['CBb4w', 'CBb3n'] and m.label in ['GC', 'GC ON'] RETURN p limit 1",
+  "graph_name": "marclab"
 }

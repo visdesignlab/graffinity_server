@@ -10,6 +10,24 @@ class MarcLabGraph(Graph):
     def __init__(self, graph):
         Graph.__init__(self, graph)
 
+    def _get_edge_id(self, edge):
+        return edge["id"]
+
+    def _get_node_id(self, node):
+        return node["id"]
+
+    def _get_edge_as_dict(self, source, target, edge):
+        edge_dictionary = {
+                    "ID": Utils.get_property_as_int(edge, "id"),
+                    "SourceStructureID": Utils.get_property_as_int(source, "id"),
+                    "TargetStructureID": Utils.get_property_as_int(target, "id"),
+                    "SourceID": Utils.get_property_as_int(source, "id"),
+                    "TargetID": Utils.get_property_as_int(target, "id"),
+                    "Type": Utils.get_property_as_string(edge, "type"),
+                    "LinkedStructures": Utils.get_property_as_string(edge, "structures")
+                }
+        return edge_dictionary
+
     def _init_edge_attributes(self):
         self._edge_attributes.append({
             "Name": "ID",

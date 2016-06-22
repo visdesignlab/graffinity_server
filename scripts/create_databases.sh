@@ -17,6 +17,7 @@ function setup {
   #install_neo4j
   createdb marclab_test 7475
   createdb marclab_22jan16 7474
+  createdb flights 7476
 }
 
 function createdb {

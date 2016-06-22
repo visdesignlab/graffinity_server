@@ -2,7 +2,9 @@ from Graph import *
 
 
 class MoviesGraph(Graph):
-    """ Implementation of a Graph object for converting from marclab neo4j database to something for the frontend.
+    """ Implementation of a Graph object for converting from movies neo4j database to something for the frontend.
+
+        This is currently broken. It doesn't have support for multi-typed nodes that appear in the movies dataset.
 
         TODO: Use neo4j schema to automatically generate this object.
     """
@@ -47,10 +49,10 @@ class MoviesGraph(Graph):
 
     def _get_edge_as_dict(self, source, target, edge):
         edge_dictionary = {
-                    "ID": Utils.get_property_as_int(edge, "edge_id"),
-                    "SourceStructureID": Utils.get_property_as_int(source, "node_id"),
-                    "TargetStructureID": Utils.get_property_as_int(target, "node_id"),
-                    "SourceID": Utils.get_property_as_int(source, "node_id"),
-                    "TargetID": Utils.get_property_as_int(target, "node_id"),
-                }
+            "ID": Utils.get_property_as_int(edge, "edge_id"),
+            "SourceStructureID": Utils.get_property_as_int(source, "node_id"),
+            "TargetStructureID": Utils.get_property_as_int(target, "node_id"),
+            "SourceID": Utils.get_property_as_int(source, "node_id"),
+            "TargetID": Utils.get_property_as_int(target, "node_id"),
+        }
         return edge_dictionary

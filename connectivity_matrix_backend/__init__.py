@@ -17,6 +17,9 @@ def get_graph(graph_name):
     elif graph_name == "movies":
         neo.authenticate('localhost:7475', 'neo4j', 'neo4j')
         neo_graph = neo.Graph('http://localhost:7475/db/data')
+    elif graph_name == "flights":
+        neo.authenticate('localhost:7476', 'neo4j', 'neo')
+        neo_graph = neo.Graph('http://localhost:7476/db/data')
     return neo_graph
 
 
@@ -39,6 +42,9 @@ def run_query(graph_name, query):
         elif graph_name == "movies":
             matrix = cm_neo.ConnectivityMatrix(path_list, 'node_id', 'edge_id')
             graph = cm_neo.MoviesGraph(results.to_subgraph())
+        elif graph_name == "flights":
+            matrix = cm_neo.ConnectivityMatrix(path_list, 'id', 'id')
+            graph = cm_neo.FlightGraph(results.to_subgraph())
         else:
             return json.dumps({
                 "message": "Need to specify which graph -- either marclab or movies"
@@ -60,7 +66,6 @@ def default_resource():
     if request.method == "POST":
         query = request.get_json()[u'query']
         graph_name = request.get_json()[u'graph_name']
-        print graph_name
         return run_query(graph_name, query)
     elif request.method == "GET":
         return "Please send a POST request here! See _example_requests folder for details."

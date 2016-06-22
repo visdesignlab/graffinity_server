@@ -34,7 +34,7 @@ class Graph:
                 dictionary[export_key] = Utils.get_property_as_float(node, key)
             else:
                 assert False
-        print dictionary
+
         return dictionary
 
     def _get_edge_as_dictionary(self, source, target, edge):

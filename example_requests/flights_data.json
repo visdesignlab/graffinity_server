@@ -1,0 +1,4 @@
+{
+  "query": "MATCH p = ()-[]-() return p limit 10;",
+  "graph_name": "flights"
+}

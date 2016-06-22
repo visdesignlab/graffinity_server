@@ -11,4 +11,4 @@ pip install Flask-RESTful
 pip install Flask-ReqArgs
 pip install json
 pip install Flask-Cors
-pip install py2neo
+pip install py2neo==2.0

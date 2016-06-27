@@ -104,10 +104,10 @@ class FlightGraph(Graph):
         })
 
         self._node_attributes.append({
-            "Name": "market_dummy",
-            "DisplayName": "market_dummy",
-            "DatabaseName": "market",
-            "Type": "float",
+            "Name": "degree",
+            "DisplayName": "degree",
+            "DatabaseName": "degree",
+            "Type": "int",
             "DataType": "quantitative",
             "Unique": "false"
         })

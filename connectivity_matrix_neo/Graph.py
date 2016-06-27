@@ -26,14 +26,17 @@ class Graph:
             key = attribute["DatabaseName"]
             export_key = attribute["Name"]
             data_type = attribute["Type"]
-            if data_type == "int":
-                dictionary[export_key] = Utils.get_property_as_int(node, key)
-            elif data_type == "string":
-                dictionary[export_key] = Utils.get_property_as_string(node, key)
-            elif data_type == "float":
-                dictionary[export_key] = Utils.get_property_as_float(node, key)
+            if key == "degree":
+                dictionary[export_key] = node.degree
             else:
-                assert False
+                if data_type == "int":
+                    dictionary[export_key] = Utils.get_property_as_int(node, key)
+                elif data_type == "string":
+                    dictionary[export_key] = Utils.get_property_as_string(node, key)
+                elif data_type == "float":
+                    dictionary[export_key] = Utils.get_property_as_float(node, key)
+                else:
+                    assert False
 
         return dictionary
 

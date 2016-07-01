@@ -111,3 +111,21 @@ class FlightGraph(Graph):
             "DataType": "quantitative",
             "Unique": "false"
         })
+
+        self._node_attributes.append({
+            "Name": "lat",
+            "DisplayName": "lat",
+            "DatabaseName": "lat",
+            "Type": "float",
+            "DataType": "quantitative",
+            "Unique": "false"
+        })
+
+        self._node_attributes.append({
+            "Name": "lon",
+            "DisplayName": "lon",
+            "DatabaseName": "lon",
+            "Type": "float",
+            "DataType": "quantitative",
+            "Unique": "false"
+        })

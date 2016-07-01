@@ -1,4 +1,4 @@
 {
-  "query": "MATCH p = ()-[]-() return p limit 10;",
+  "query": "MATCH p = (s)-[:FLIGHT]->(t) WHERE s.state in ['CA', 'OR', 'WA'] AND t.state in ['CT', 'ME', 'MA', 'RI', 'NH', 'VT'] RETURN (p) UNION MATCH p = (s)-[x:FLIGHT]->(i)-[y:FLIGHT]->(t)  WHERE s.state in ['CA', 'OR', 'WA']  AND t.state in ['CT', 'ME', 'MA', 'RI', 'NH', 'VT'] AND x.carrier = y.carrier AND x.arr_time < y.dep_time RETURN (p)",
   "graph_name": "flights"
 }

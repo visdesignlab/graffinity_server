@@ -33,8 +33,15 @@ def run_query(graph_name, query):
     try:
         results = neo_graph.cypher.execute(query)
         path_list = []
+        length_dictionary = {}
         for result in results:
-            path_list.append(neo.Path(result.p))
+            neo_path = neo.Path(neo.Path(result.p))
+            path_list.append(neo_path)
+            path_length = len(neo_path)
+            if path_length not in length_dictionary:
+                length_dictionary[path_length] = 1
+            else:
+                length_dictionary[path_length] += 1
 
         if graph_name == "marclab":
             matrix = cm_neo.ConnectivityMatrix(path_list, 'id', 'id')
@@ -52,7 +59,8 @@ def run_query(graph_name, query):
 
         return json.dumps({
             "graph": graph.get_as_json_object(),
-            "matrix": matrix.get_as_dictionary()
+            "matrix": matrix.get_as_dictionary(),
+            "lengths": length_dictionary
         })
 
     except cypher.CypherError as error:

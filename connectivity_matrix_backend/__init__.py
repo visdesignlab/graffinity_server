@@ -45,17 +45,19 @@ def run_query(graph_name, query):
 
         if graph_name == "marclab":
             matrix = cm_neo.ConnectivityMatrix(path_list, 'id', 'id')
-            graph = cm_neo.MarcLabGraph(results.to_subgraph())
+            graph = cm_neo.MarcLabGraph()
         elif graph_name == "movies":
             matrix = cm_neo.ConnectivityMatrix(path_list, 'node_id', 'edge_id')
-            graph = cm_neo.MoviesGraph(results.to_subgraph())
+            graph = cm_neo.MoviesGraph()
         elif graph_name == "flights":
             matrix = cm_neo.ConnectivityMatrix(path_list, 'id', 'id')
-            graph = cm_neo.FlightGraph(results.to_subgraph())
+            graph = cm_neo.FlightGraph()
         else:
             return json.dumps({
                 "message": "Need to specify which graph -- either marclab or movies"
             }), 400
+
+        graph.activate(results.to_subgraph())
 
         return json.dumps({
             "graph": graph.get_as_json_object(),

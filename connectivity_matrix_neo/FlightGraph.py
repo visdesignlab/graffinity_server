@@ -5,8 +5,8 @@ class FlightGraph(Graph):
     """ Implementation of a Graph object for converting from flight neo4j database to something for the frontend.
     """
 
-    def __init__(self, graph):
-        Graph.__init__(self, graph)
+    def __init__(self):
+        Graph.__init__(self)
 
     def _get_edge_id(self, edge):
         return edge["id"]

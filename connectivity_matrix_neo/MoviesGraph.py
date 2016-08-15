@@ -9,8 +9,8 @@ class MoviesGraph(Graph):
         TODO: Use neo4j schema to automatically generate this object.
     """
 
-    def __init__(self, graph):
-        Graph.__init__(self, graph)
+    def __init__(self):
+        Graph.__init__(self)
 
     def _get_edge_id(self, edge):
         return edge["edge_id"]

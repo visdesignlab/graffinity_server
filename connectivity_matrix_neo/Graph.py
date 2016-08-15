@@ -8,7 +8,7 @@ class Graph:
         a mapping from neo4j attributes to something appropriate for the front end.
     """
 
-    def __init__(self, graph):
+    def __init__(self):
         self._nodes = []
         self._edges = []
         self._node_attributes = []
@@ -16,8 +16,6 @@ class Graph:
 
         self._init_edge_attributes()
         self._init_node_attributes()
-        self._init_nodes(graph.nodes)
-        self._init_edges(graph.relationships)
 
     @staticmethod
     def _get_node_as_dictionary(node, attributes):
@@ -79,6 +77,11 @@ class Graph:
 
     def _is_node_added(self, node):
         return self._is_entity_added(self._nodes, self._get_node_id(node))
+
+    def activate(self, graph):
+        self._init_nodes(graph.nodes)
+        self._init_edges(graph.relationships)
+
 
     def get_as_json_object(self):
         return {

@@ -23,12 +23,38 @@ def get_graph(graph_name):
     return neo_graph
 
 
+def run_match(graph_name, key):
+    graph = 0
+    neo_graph = get_graph(graph_name)
+    matches = []
+    if graph_name == "marclab":
+        graph = cm_neo.MarcLabGraph()
+    elif graph_name == "movies":
+        graph = cm_neo.MoviesGraph()
+    elif graph_name == "flights":
+        graph = cm_neo.FlightGraph()
+    else:
+        return json.dumps({
+            "message": "Need to specify which graph -- either marclab or movies"
+        }), 400
+
+    node_attributes = graph.get_node_attributes()
+    for attribute in node_attributes:
+        attribute_type = attribute["DataType"]
+        if attribute_type != "quantitative":
+            attribute_name = attribute["DatabaseName"]
+            query = "MATCH (n) WHERE n." + attribute_name + " =~ '(?i)" + key + ".*'" + " RETURN DISTINCT n." + attribute_name + " LIMIT 3;"
+            results = neo_graph.cypher.execute(query)
+            for result in results:
+                matches.append({
+                    "attribute": attribute_name,
+                    "value": result[0]
+                })
+
+    return matches
+
+
 def run_query(graph_name, query):
-    """
-    :param graph: py2neo graph object
-    :param query: cypher query string that must return paths
-    :return:
-    """
     neo_graph = get_graph(graph_name)
     try:
         results = neo_graph.cypher.execute(query)
@@ -79,6 +105,14 @@ def default_resource():
         return run_query(graph_name, query)
     elif request.method == "GET":
         return "Please send a POST request here! See _example_requests folder for details."
+
+
+@app.route("/match", methods=["POST"])
+def match_resource():
+    request_data = request.get_json()
+    graph_name = request_data[u'graph_name']
+    key = request_data[u'key']
+    return json.dumps(run_match(graph_name, key))
 
 
 if __name__ == '__main__':

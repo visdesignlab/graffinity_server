@@ -62,7 +62,7 @@ class MarcLabGraph(Graph):
         })
 
         self._edge_attributes.append({
-            "Name": "Type",
+            "Name": "type",
             "DisplayName": "edge type",
             "Type": "string",
             "DataType": "categorical",

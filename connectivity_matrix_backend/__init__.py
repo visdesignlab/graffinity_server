@@ -54,6 +54,39 @@ def run_match(graph_name, key):
     return matches
 
 
+def run_edge_match(graph_name, key):
+    graph = 0
+    neo_graph = get_graph(graph_name)
+    matches = []
+    if graph_name == "marclab":
+        graph = cm_neo.MarcLabGraph()
+    elif graph_name == "movies":
+        graph = cm_neo.MoviesGraph()
+    elif graph_name == "flights":
+        graph = cm_neo.FlightGraph()
+    else:
+        return json.dumps({
+            "message": "Need to specify which graph -- either marclab or movies"
+        }), 400
+
+    edge_attributes = graph.get_edge_attributes()
+    for attribute in edge_attributes:
+        attribute_type = attribute["DataType"]
+        if attribute_type == "categorical":
+            print attribute
+            attribute_name = attribute["Name"]
+            query = "MATCH ()-[r]->() WHERE r." + attribute_name + " =~ '(?i)" + key + ".*'" + " RETURN DISTINCT r." + attribute_name + " LIMIT 3;"
+            results = neo_graph.cypher.execute(query)
+            print results
+            for result in results:
+                matches.append({
+                    "attribute": attribute_name,
+                    "value": result[0]
+                })
+    return matches
+
+
+
 def run_query(graph_name, query):
     neo_graph = get_graph(graph_name)
     try:
@@ -114,6 +147,13 @@ def match_resource():
     key = request_data[u'key']
     return json.dumps(run_match(graph_name, key))
 
+
+@app.route("/match_edge", methods=["POST"])
+def match_edge():
+    request_data = request.get_json()
+    graph_name = request_data[u'graph_name']
+    key = request_data[u'key']
+    return json.dumps(run_edge_match(graph_name, key))
 
 if __name__ == '__main__':
     app.run()

@@ -16,7 +16,7 @@ dbprefix="/home/`whoami`/neo4j_"
 function setup {
   #install_neo4j
   createdb marclab_test 7475
-  createdb marclab_22jan16 7474
+  createdb marclab 7474
   createdb flights 7476
 }
 

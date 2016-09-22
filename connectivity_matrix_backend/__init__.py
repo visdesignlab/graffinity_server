@@ -73,11 +73,9 @@ def run_edge_match(graph_name, key):
     for attribute in edge_attributes:
         attribute_type = attribute["DataType"]
         if attribute_type == "categorical":
-            print attribute
             attribute_name = attribute["Name"]
             query = "MATCH ()-[r]->() WHERE r." + attribute_name + " =~ '(?i)" + key + ".*'" + " RETURN DISTINCT r." + attribute_name
             results = neo_graph.cypher.execute(query)
-            print results
             for result in results:
                 matches.append({
                     "attribute": attribute_name,

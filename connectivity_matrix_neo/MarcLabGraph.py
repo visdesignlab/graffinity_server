@@ -114,20 +114,20 @@ class MarcLabGraph(Graph):
             "Unique": "true"
         })
 
-        self._node_attributes.append({
-            "Name": "HullArea",
-            "DisplayName": "area",
-            "DatabaseName": "hull",
-            "Type": "float",
-            "DataType": "quantitative",
-            "Unique": "false"
-        })
+        # self._node_attributes.append({
+        #     "Name": "HullArea",
+        #     "DisplayName": "area",
+        #     "DatabaseName": "hull",
+        #     "Type": "float",
+        #     "DataType": "quantitative",
+        #     "Unique": "false"
+        # })
 
-        self._node_attributes.append({
-            "Name": "Locations",
-            "DisplayName": "locations",
-            "DatabaseName": "locations",
-            "Type": "int",
-            "DataType": "quantitative",
-            "Unique": "false"
-        })
+        # self._node_attributes.append({
+        #     "Name": "Locations",
+        #     "DisplayName": "locations",
+        #     "DatabaseName": "locations",
+        #     "Type": "int",
+        #     "DataType": "quantitative",
+        #     "Unique": "false"
+        # })

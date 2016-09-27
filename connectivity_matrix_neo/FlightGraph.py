@@ -15,12 +15,23 @@ class FlightGraph(Graph):
         return node["id"]
 
     def _get_edge_as_dict(self, source, target, edge):
+        arr_time = Utils.get_property_as_int(edge, "arr_time")
+        dep_time = Utils.get_property_as_int(edge, "dep_time")
+        dep_month = str(Utils.get_property_as_int(edge, "month"))
+        dep_day = str(Utils.get_property_as_int(edge, "day"))
+
+        # This shit has to match what is in the parse function on client side.
         edge_dictionary = {
-                    "ID": Utils.get_property_as_int(edge, "id"),
-                    "SourceID": Utils.get_property_as_int(source, "id"),
-                    "TargetID": Utils.get_property_as_int(target, "id"),
-                    "Carrier": edge["carrier"]
-                }
+            "ID": Utils.get_property_as_int(edge, "id"),
+            "SourceID": Utils.get_property_as_int(source, "id"),
+            "TargetID": Utils.get_property_as_int(target, "id"),
+            "Carrier": edge["carrier"],
+            "DepDate": "15-" + dep_month + "-" + dep_day,
+            "DepTime": dep_time,
+            "ArrTime": arr_time,
+            "FlightNum": Utils.get_property_as_string(edge, "flight_id")
+        }
+
         return edge_dictionary
 
     def _init_edge_attributes(self):
@@ -57,7 +68,6 @@ class FlightGraph(Graph):
         })
 
     def _init_node_attributes(self):
-
         self._node_attributes.append({
             "Name": "ID",
             "DisplayName": "id",

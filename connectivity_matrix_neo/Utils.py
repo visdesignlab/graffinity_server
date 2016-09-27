@@ -11,3 +11,20 @@ def get_property_as_float(entity, name):
 
 def get_property_as_int(entity, name):
     return int(entity.properties[name])
+
+
+def pad_string_for_time(string):
+    if len(string) == 3:
+        return "0" + string
+    elif len(string) == 2:
+        return "00" + string
+    elif len(string) == 1:
+        return "000" + string
+    else:
+        return string
+
+
+def pad_string_for_date(string):
+    if len(string) == 1:
+        return "0" + string
+    return string

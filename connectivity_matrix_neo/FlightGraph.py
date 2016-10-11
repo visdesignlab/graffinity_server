@@ -29,7 +29,7 @@ class FlightGraph(Graph):
             "DepDate": "15-" + dep_month + "-" + dep_day,
             "DepTime": dep_time,
             "ArrTime": arr_time,
-            "FlightNum": Utils.get_property_as_string(edge, "flight_id")
+            "FlightNum": Utils.get_property_as_int(edge, "id")
         }
 
         return edge_dictionary

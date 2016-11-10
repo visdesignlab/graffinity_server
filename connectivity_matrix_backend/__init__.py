@@ -87,6 +87,7 @@ def run_edge_match(graph_name, key):
 
 def run_query(graph_name, query):
     neo_graph = get_graph(graph_name)
+    print query
     try:
         results = neo_graph.cypher.execute(query)
         path_list = []

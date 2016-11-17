@@ -43,7 +43,7 @@ def run_match(graph_name, key):
         attribute_type = attribute["DataType"]
         if attribute_type != "quantitative":
             attribute_name = attribute["DatabaseName"]
-            query = "MATCH (n) WHERE n." + attribute_name + " =~ '(?i)" + key + ".*'" + " RETURN DISTINCT n." + attribute_name + " LIMIT 3;"
+            query = "MATCH (n) WHERE n." + attribute_name + " =~ '(?i)" + key + ".*'" + " RETURN DISTINCT n." + attribute_name
             results = neo_graph.cypher.execute(query)
             for result in results:
                 matches.append({

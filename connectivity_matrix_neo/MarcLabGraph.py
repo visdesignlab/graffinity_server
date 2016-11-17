@@ -107,27 +107,27 @@ class MarcLabGraph(Graph):
 
         self._node_attributes.append({
             "Name": "StructureID",
-            "DisplayName": "structure id",
+            "DisplayName": "id",
             "DatabaseName": "id",
             "Type": "int",
             "DataType": "id",
             "Unique": "true"
         })
 
-        # self._node_attributes.append({
-        #     "Name": "HullArea",
-        #     "DisplayName": "area",
-        #     "DatabaseName": "hull",
-        #     "Type": "float",
-        #     "DataType": "quantitative",
-        #     "Unique": "false"
-        # })
+        self._node_attributes.append({
+            "Name": "HullArea",
+            "DisplayName": "area",
+            "DatabaseName": "hull",
+            "Type": "float",
+            "DataType": "quantitative",
+            "Unique": "false"
+        })
 
-        # self._node_attributes.append({
-        #     "Name": "Locations",
-        #     "DisplayName": "locations",
-        #     "DatabaseName": "locations",
-        #     "Type": "int",
-        #     "DataType": "quantitative",
-        #     "Unique": "false"
-        # })
+        self._node_attributes.append({
+            "Name": "Locations",
+            "DisplayName": "locations",
+            "DatabaseName": "locations",
+            "Type": "int",
+            "DataType": "quantitative",
+            "Unique": "false"
+        })

@@ -19,6 +19,7 @@ class FlightGraph(Graph):
         dep_time = Utils.get_property_as_int(edge, "dep_time")
         dep_month = str(Utils.get_property_as_int(edge, "month"))
         dep_day = str(Utils.get_property_as_int(edge, "day"))
+        dep_delay = str(Utils.get_property_as_int(edge, "dep_delay"))
 
         # This shit has to match what is in the parse function on client side.
         edge_dictionary = {
@@ -29,7 +30,8 @@ class FlightGraph(Graph):
             "DepDate": "15-" + dep_month + "-" + dep_day,
             "DepTime": dep_time,
             "ArrTime": arr_time,
-            "FlightNum": Utils.get_property_as_int(edge, "id")
+            "FlightNum": Utils.get_property_as_int(edge, "id"),
+            "DepDelay": dep_delay
         }
 
         return edge_dictionary

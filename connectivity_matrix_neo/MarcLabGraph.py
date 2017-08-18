@@ -17,6 +17,7 @@ class MarcLabGraph(Graph):
         return node["id"]
 
     def _get_edge_as_dict(self, source, target, edge):
+        print edge
         edge_dictionary = {
                     "ID": Utils.get_property_as_int(edge, "id"),
                     "SourceStructureID": Utils.get_property_as_int(source, "id"),
@@ -24,7 +25,9 @@ class MarcLabGraph(Graph):
                     "SourceID": Utils.get_property_as_int(source, "id"),
                     "TargetID": Utils.get_property_as_int(target, "id"),
                     "Type": Utils.get_property_as_string(edge, "type"),
-                    "LinkedStructures": Utils.get_property_as_string(edge, "structures")
+                    "LinkedStructures": Utils.get_property_as_string(edge, "structures"),
+                    "SourceSizes": Utils.get_propoery_as_list(edge, "source_sizes"),
+                    "TargetSizes": Utils.get_propoery_as_list(edge, "target_sizes")
                 }
         return edge_dictionary
 
@@ -123,11 +126,11 @@ class MarcLabGraph(Graph):
             "Unique": "false"
         })
 
-        self._node_attributes.append({
-            "Name": "Locations",
-            "DisplayName": "locations",
-            "DatabaseName": "locations",
-            "Type": "int",
-            "DataType": "quantitative",
-            "Unique": "false"
-        })
+        # self._node_attributes.append({
+        #     "Name": "Locations",
+        #     "DisplayName": "locations",
+        #     "DatabaseName": "locations",
+        #     "Type": "int",
+        #     "DataType": "quantitative",
+        #     "Unique": "false"
+        # })

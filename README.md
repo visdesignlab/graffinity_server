@@ -10,6 +10,7 @@ These directions are for setting up the Graffinity Server for local development 
 
 1. Clone this repository
 1. Cd into the directory
+1. Make sure that the git lfs files are downloaded and checked out in the _data directory using `git lfs fetch` and `git lfs checkout`
 1. Run `vagrant up` to create a new virtual machine and automatically configure it for Graffinity (this will take a while)
 1. Run `vagrant ssh`to connect to the machine
 1. In the virtual machine, launch the script `python /vagrant/run_server.py` to start the Graffinity application
